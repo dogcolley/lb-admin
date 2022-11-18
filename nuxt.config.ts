@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  css: ['~/assets/main.css'],
+  css: ['vuetify/lib/styles/main.sass'],
   app: {
     head: {
       charset: 'utf-16',
@@ -11,6 +11,14 @@ export default defineNuxtConfig({
       ],
     },
     //pageTransition: { name: 'page', mode: 'out-in' }
+  },
+  build: {
+    transpile: ['vuetify']
+  },
+  vite: {
+    define: {
+        'process.env.DEBUG': 'false',
+    }
   },
   buildModules: [
     // pinia plugin

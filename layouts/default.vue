@@ -2,6 +2,19 @@
 import { useRoute } from 'vue-router'
 const appConfig = useAppConfig()
 const route = useRoute()
+
+const drawer = ref<boolean>(false);
+
+function navigate(page:string){
+  return navigateTo({
+    path: `/${page}`,
+    query: {
+      name: `${page}`,
+    }
+  })
+}
+
+
 </script>
 
 <template>
@@ -11,18 +24,54 @@ const route = useRoute()
   </Head>
 
   <header>
-    <h1>{{appConfig.title}}</h1>
-    <p>The intuitive store for Vue</p>
-    <nav>
-      <ul>
-        <li v-if="route.path !== '/'">
-          <router-link to="/">Home</router-link>
-        </li>
-        <li>
-          <router-link to="/test">test</router-link>
-        </li>
-      </ul>
-    </nav>
+    
+    <v-card>
+      <v-layout>
+
+        <v-app-bar
+          color="primary"
+          prominent
+        >
+          <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+          <v-toolbar-title>
+            <h1 style="font-size:inherit">{{appConfig.title}}</h1>
+          </v-toolbar-title>
+
+          <v-spacer></v-spacer>
+
+          <v-btn variant="text" icon="mdi-magnify"></v-btn>
+
+          <v-btn variant="text" icon="mdi-filter"></v-btn>
+
+          <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+        </v-app-bar>
+
+
+        <v-navigation-drawer
+          expand-on-hover
+          rail
+          v-model="drawer"
+        >
+          <v-list>
+            <v-list-item
+              prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+              title="Sandra Adams"
+              subtitle="sandra_a88@gmailcom"
+            ></v-list-item>
+          </v-list>
+
+          <v-divider></v-divider>
+
+          <v-list density="compact" nav>
+            <v-list-item prepend-icon="mdi-home" title="home" value="home" @click="navigate('')"></v-list-item>
+            <v-list-item prepend-icon="mdi-test-tube-empty" title="test" value="test" @click="navigate('test')"></v-list-item>
+            <v-list-item prepend-icon="mdi-vuetify" title="vuetify" value="vuetify" @click="navigate('vuetify')"></v-list-item>
+            <v-list-item prepend-icon="mdi-fruit-pineapple " title="pinia" value="pinia" @click="navigate('pinia')"></v-list-item>
+          </v-list>
+        </v-navigation-drawer>
+      </v-layout>
+    </v-card>
   </header>
 
   <slot />
