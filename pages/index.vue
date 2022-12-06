@@ -1,9 +1,10 @@
 <script setup lang="ts">
-  console.log('?');
+//const { data } =  useFetch(() => `/api/articles`)
 </script>
 
 <template>
   <div>
+    index
   </div>
 </template>
 

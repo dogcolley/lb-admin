@@ -28,10 +28,10 @@ watch(ref_cnt,()=>{
 })
 
 definePageMeta({
-  middleware: 'hello',
+  middleware: ['test','auth'],
 });
 
-const { data } = await useFetch(() => `/api/hello`)
+const { data } = await useFetch(() => `/api/`)
 
 onMounted(async()=>{
 })
@@ -77,7 +77,7 @@ onMounted(async()=>{
 
     <div>
         getFetch <br>
-        data : {{data?.msg}}
+        data : {{data}}
     </div>
 
     <hr/>
